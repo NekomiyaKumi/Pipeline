@@ -14,15 +14,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-        - name: C&U
-          run: |
-            docker run \
-            -i \
-            -e VIDEO_URL=${{ github.event.inputs.url }} \
-            -e ACCESS_KEY=${{ secrets.ACCESS_KEY }} \
-            -e SECRET_KEY=${{ secrets.SECRET_KEY }} \
-            -e BUCKET_NAME=${{ secrets.BUCKET_NAME }} \
-            -e BUCKET_URL=${{ secrets.BUCKET_URL }} \
-            ghcr.io/nekomiyakumi/combiner:0.2.1
+      - name: Log into GitHub Container Registry
+        run: echo "${{ secrets.CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: C&U
+        run: |
+          docker run \
+          -i \
+          -e VIDEO_URL=${{ github.event.inputs.url }} \
+          -e ACCESS_KEY=${{ secrets.ACCESS_KEY }} \
+          -e SECRET_KEY=${{ secrets.SECRET_KEY }} \
+          -e BUCKET_NAME=${{ secrets.BUCKET_NAME }} \
+          -e BUCKET_URL=${{ secrets.BUCKET_URL }} \
+          ghcr.io/nekomiyakumi/combiner:0.2.1
