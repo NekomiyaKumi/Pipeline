@@ -28,4 +28,4 @@ jobs:
           -e SECRET_KEY=${{ secrets.SECRET_KEY }} \
           -e BUCKET_NAME=${{ secrets.BUCKET_NAME }} \
           -e BUCKET_URL=${{ secrets.BUCKET_URL }} \
-          ghcr.io/nekomiyakumi/combiner:0.2.1
+          ghcr.io/nekomiyakumi/combiner:0.2.2
