@@ -15,21 +15,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Docker Login
-        uses: azure/docker-login@v1
+        
+      - name: Release
+        uses: andreiio/rclone-release@v1
         with:
-          login-server: docker.pkg.github.com
-          username: $GITHUB_ACTOR
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-
-      - name: Combine
-        uses: nekomiyakumi/ytb-combiner@v0.1
-        with:
-          bucket: ${{ secrets.BUCKET_NAME }}
-          video_url: ${{ github.event.inputs.url }}
+          bucket: "s3:release"
+          publish_dir: ./public
+          release_name: project-name
         env:
-          RCLONE_CONFIG_TARGET_TYPE: b2
-          RCLONE_CONFIG_TARGET_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
-          RCLONE_CONFIG_TARGET_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
+          RCLONE_CONFIG_S3_TYPE: s3
+          RCLONE_CONFIG_S3_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+          RCLONE_CONFIG_S3_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
+  
