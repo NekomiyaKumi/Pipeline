@@ -23,6 +23,6 @@ jobs:
           video_url: ${{ github.event.inputs.url }}
         env:
           RCLONE_CONFIG_TARGET_TYPE: b2
-          RCLONE_CONFIG_TARGET_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-          RCLONE_CONFIG_TARGET_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
+          RCLONE_CONFIG_TARGET_ACCOUNT: ${{ secrets.ACCESS_KEY }}
+          RCLONE_CONFIG_TARGET_KEY: ${{ secrets.SECRET_KEY }}
   
